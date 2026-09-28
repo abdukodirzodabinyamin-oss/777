@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MY DAY</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    color:white;
+
+    background:
+    radial-gradient(circle at 10% 10%,#28205d 0%,transparent 30%),
+    radial-gradient(circle at 90% 80%,#073b55 0%,transparent 30%),
+    #070914;
+
+    transition:.4s;
+}
+
+body.light{
+    color:#172033;
+    background:
+    radial-gradient(circle at 10% 10%,#e4e1ff,transparent 35%),
+    radial-gradient(circle at 90% 80%,#dffaff,transparent 35%),
+    #f7f9fc;
+}
+
+/* HEADER */
+
+header{
+    min-height:82px;
+    padding:15px 28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    background:rgba(7,9,20,.88);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+body.light header{
+    background:rgba(255,255,255,.9);
+    border-color:#e2e5ec;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.logo-icon{
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:14px;
+    background:linear-gradient(135deg,#715cff,#347fff);
+}
+
+.logo span{
+    color:#8173ff;
+}
+
+.clock-box{
+    text-align:center;
+}
+
+.clock{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.date{
+    color:#858ea4;
+    font-size:11px;
+    margin-top:4px;
+}
+
+nav{
+    display:flex;
+    gap:6px;
+}
+
+nav button,
+.header-btn{
+    border:0;
+    cursor:pointer;
+    padding:11px 14px;
+    border-radius:12px;
+    background:rgba(255,255,255,.07);
+    color:#aeb5c7;
+    transition:.2s;
+}
+
+nav button:hover,
+.header-btn:hover{
+    background:#715cff;
+    color:white;
+}
+
+nav button.active{
+    background:#715cff;
+    color:white;
+}
+
+.header-right{
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+.profile-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:linear-gradient(135deg,#715cff,#347fff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:38px 20px 70px;
+}
+
+.page{
+    display:none;
+    animation:show .3s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:40px;
+}
+
+.hero p{
+    color:#858ea4;
+    margin-top:7px;
+}
+
+/* GLASS */
+
+.glass{
+    padding:24px;
+    border-radius:25px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 60px rgba(0,0,0,.15);
+}
+
+body.light .glass{
+    background:rgba(255,255,255,.85);
+    border-color:#e2e5ec;
+}
+
+/* DAYS */
+
+.days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:9px;
+    margin-bottom:22px;
+}
+
+.day{
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:17px;
+    padding:15px 5px;
+    background:rgba(255,255,255,.04);
+    color:white;
+    cursor:pointer;
+}
+
+body.light .day{
+    color:#172033;
+    background:white;
+    border-color:#e2e5ec;
+}
+
+.day.active{
+    background:linear-gradient(135deg,#715cff,#347fff);
+    color:white;
+}
+
+.day-name{
+    font-size:10px;
+    color:#929bb0;
+}
+
+.day.active .day-name{
+    color:white;
+}
+
+.day-number{
+    font-size:23px;
+    font-weight:bold;
+    margin-top:7px;
+}
+
+/* GRID */
+
+.content-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:20px;
+}
+
+/* TITLES */
+
+.card-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.card-subtitle{
+    color:#858ea4;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* PROGRESS */
+
+.progress-box{
+    margin:20px 0;
+    padding:15px;
+    border-radius:16px;
+    background:rgba(0,0,0,.15);
+}
+
+.progress-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    margin-bottom:9px;
+}
+
+.progress-percent{
+    color:#8173ff;
+    font-weight:bold;
+}
+
+.progress{
+    height:8px;
+    background:#2b3042;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#715cff,#22d3ee);
+    transition:.3s;
+}
+
+/* TASKS */
+
+.tasks{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.task{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    border-radius:15px;
+    background:rgba(255,255,255,.045);
+}
+
+body.light .task{
+    background:#f6f7fa;
+}
+
+.task-time{
+    width:42px;
+    color:#858ea4;
+    font-size:11px;
+}
+
+.task-icon{
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:rgba(113,92,255,.15);
+    font-size:20px;
+}
+
+.task-info{
+    flex:1;
+}
+
+.task-name{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.task-desc{
+    color:#858ea4;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.check{
+    width:28px;
+    height:28px;
+    border:2px solid #596176;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.check.done{
+    background:#22c55e;
+    border-color:#22c55e;
+}
+
+.check.done::after{
+    content:"✓";
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+}
+
+/* ALARM */
+
+.alarm-center{
+    display:flex;
+    justify-content:center;
+    margin:25px 0;
+}
+
+.alarm-box{
+    width:min(650px,100%);
+    padding:22px;
+    border-radius:22px;
+    background:
+    linear-gradient(
+        135deg,
+        rgba(113,92,255,.18),
+        rgba(34,211,238,.08)
+    );
+    border:1px solid rgba(113,92,255,.3);
+    text-align:center;
+}
+
+.alarm-box h2{
+    margin-bottom:8px;
+}
+
+.alarm-box p{
+    color:#858ea4;
+    font-size:12px;
+}
+
+.alarm-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
+.alarm-controls input{
+    padding:12px;
+    border:0;
+    border-radius:10px;
+    background:#20263a;
+    color:white;
+    font-size:16px;
+}
+
+.alarm-button{
+    border:0;
+    padding:12px 20px;
+    border-radius:11px;
+    background:#715cff;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.alarm-button.on{
+    background:#16a34a;
+}
+
+/* STATS */
+
+.stat{
+    margin-top:12px;
+    padding:18px;
+    border-radius:17px;
+    background:rgba(255,255,255,.045);
+}
+
+body.light .stat{
+    background:#f1f3f7;
+}
+
+.stat-number{
+    font-size:30px;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.stat-text{
+    color:#858ea4;
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* SPORT */
+
+.sport-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.sport-card{
+    padding:23px;
+    border-radius:22px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+body.light .sport-card{
+    background:white;
+    border-color:#e2e5ec;
+}
+
+.sport-icon{
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:16px;
+    background:rgba(113,92,255,.15);
+    font-size:27px;
+    margin-bottom:15px;
+}
+
+.sport-card p{
+    color:#858ea4;
+    font-size:12px;
+    margin-top:7px;
+}
+
+.start-btn{
+    border:0;
+    padding:11px 18px;
+    margin-top:18px;
+    border-radius:11px;
+    background:linear-gradient(135deg,#715cff,#347fff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* RESULTS */
+
+.week-results{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    margin-top:20px;
+}
+
+.result-card{
+    padding:18px 8px;
+    text-align:center;
+    border-radius:18px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+body.light .result-card{
+    background:white;
+    border-color:#e2e5ec;
+}
+
+.result-card.good{
+    border-color:#22c55e;
+}
+
+.result-card.bad{
+    border-color:#ef4444;
+}
+
+.result-icon{
+    font-size:25px;
+}
+
+.result-day{
+    font-size:11px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.result-status{
+    font-size:12px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.good .result-status{
+    color:#22c55e;
+}
+
+.bad .result-status{
+    color:#ef4444;
+}
+
+.result-number{
+    color:#858ea4;
+    font-size:10px;
+    margin-top:5px;
+}
+
+/* PROFILE */
+
+.profile-container{
+    max-width:950px;
+    margin:auto;
+}
+
+.profile-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:12px;
+    background:#ef4444;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.avatar{
+    width:100px;
+    height:100px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(135deg,#715cff,#347fff);
+    font-size:40px;
+    font-weight:bold;
+}
+
+.profile-title{
+    text-align:center;
+    margin-top:15px;
+}
+
+.profile-sub{
+    text-align:center;
+    color:#858ea4;
+    margin-top:5px;
+}
+
+.profile-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:25px;
+}
+
+.profile-stat{
+    padding:18px;
+    text-align:center;
+    border-radius:15px;
+    background:rgba(255,255,255,.045);
+}
+
+.profile-stat b{
+    display:block;
+    font-size:25px;
+}
+
+.profile-stat span{
+    color:#858ea4;
+    font-size:11px;
+}
+
+.profile-week{
+    margin-top:25px;
+}
+
+.profile-week h2{
+    margin-bottom:15px;
+}
+
+/* TIMER */
+
+.timer-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.8);
+    backdrop-filter:blur(10px);
+}
+
+.timer-box{
+    width:min(430px,90%);
+    padding:35px;
+    text-align:center;
+    border-radius:27px;
+    background:#11162d;
+}
+
+.timer-number{
+    font-size:70px;
+    font-weight:bold;
+    margin:25px 0;
+}
+
+.timer-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+.timer-actions button{
+    border:0;
+    padding:12px 18px;
+    border-radius:11px;
+    color:white;
+    cursor:pointer;
+}
+
+.pause-btn{
+    background:#715cff;
+}
+
+.close-timer{
+    background:#343a4d;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    header{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    nav{
+        order:5;
+        width:100%;
+        justify-content:center;
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+
+    .days{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .week-results{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:600px){
+
+    .hero{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .days{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .sport-grid{
+        grid-template-columns:1fr;
+    }
+
+    .week-results{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .profile-stats{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+    <div class="logo-icon">📅</div>
+    MY <span>DAY</span>
+</div>
+
+<div class="clock-box">
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="date" id="date">---</div>
+</div>
+
+<nav>
+
+<button class="active" onclick="showPage('home',this)">
+🏠 <span data-t="home">Рӯзи ман</span>
+</button>
+
+<button onclick="showPage('sport',this)">
+🏋️ <span data-t="sport">Варзиш</span>
+</button>
+
+<button onclick="showPage('results',this)">
+📊 <span data-t="results">Натиҷаҳо</span>
+</button>
+
+</nav>
+
+<div class="header-right">
+
+<button class="header-btn" onclick="changeLanguage()" id="languageButton">
+🌐 TG
+</button>
+
+<button class="header-btn" onclick="toggleTheme()" id="themeButton">
+🌙
+</button>
+
+<button class="profile-btn" onclick="openProfile()">
+M
+</button>
+
+</div>
+
+</header>
+
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<div>
+
+<h1 data-t="hello">
+Салом 👋
+</h1>
+
+<p data-t="welcome">
+Рӯзи худро бо нақшаи хуб оғоз кун.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ALARM -->
+
+<div class="alarm-center">
+
+<div class="alarm-box">
+
+<h2 data-t="alarmTitle">
+🔔 Будильники ман
+</h2>
+
+<p data-t="alarmText">
+Вақтеро интихоб кун, то ҳангоми расидани вақт огоҳӣ гирӣ.
+</p>
+
+<div class="alarm-controls">
+
+<input
+type="time"
+id="alarmTime">
+
+<button
+class="alarm-button"
+id="alarmButton"
+onclick="toggleAlarm()">
+
+🔕 <span data-t="alarmOff">
+Фаъол кардан
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DAYS -->
+
+<div class="days">
+
+<button class="day">
+<div class="day-name">ДУШАНБЕ</div>
+<div class="day-number">10</div>
+</button>
+
+<button class="day">
+<div class="day-name">СЕШАНБЕ</div>
+<div class="day-number">11</div>
+</button>
+
+<button class="day active">
+<div class="day-name">ЧОРШАНБЕ</div>
+<div class="day-number">12</div>
+</button>
+
+<button class="day">
+<div class="day-name">ПАНҶШАНБЕ</div>
+<div class="day-number">13</div>
+</button>
+
+<button class="day">
+<div class="day-name">ҶУМЪА</div>
+<div class="day-number">14</div>
+</button>
+
+<button class="day">
+<div class="day-name">ШАНБЕ</div>
+<div class="day-number">15</div>
+</button>
+
+<button class="day">
+<div class="day-name">ЯКШАНБЕ</div>
+<div class="day-number">16</div>
+</button>
+
+</div>
+
+
+<div class="content-grid">
+
+
+<!-- TASKS -->
+
+<div class="glass">
+
+<div class="card-title">
+
+<div>
+
+<h2 data-t="tasksTitle">
+📋 Вазифаҳои имрӯз
+</h2>
+
+<div class="card-subtitle" data-t="tasksSub">
+Корҳои худро иҷро кун
+</div>
+
+</div>
+
+</div>
+
+
+<div class="progress-box">
+
+<div class="progress-top">
+
+<span data-t="progress">
+Пешрафт
+</span>
+
+<span
+class="progress-percent"
+id="progressPercent">
+0%
+</span>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+</div>
+
+
+<div class="tasks">
+
+
+<div class="task">
+
+<div class="task-time">06:00</div>
+
+<div class="task-icon">🌅</div>
+
+<div class="task-info">
+
+<div class="task-name" data-t="wake">
+Хестан
+</div>
+
+<div class="task-desc" data-t="wakeDesc">
+Рӯзро барвақт оғоз кун
+</div>
+
+</div>
+
+<div class="check" onclick="completeTask(this)"></div>
+
+</div>
+
+
+<div class="task">
+
+<div class="task-time">06:10</div>
+
+<div class="task-icon">🪥</div>
+
+<div class="task-info">
+
+<div class="task-name" data-t="wash">
+Дандон шустан
+</div>
+
+<div class="task-desc" data-t="washDesc">
+Омодагӣ ба рӯз
+</div>
+
+</div>
+
+<div class="check" onclick="completeTask(this)"></div>
+
+</div>
+
+
+<div class="task">
+
+<div class="task-time">06:30</div>
+
+<div class="task-icon">🏃</div>
+
+<div class="task-info">
+
+<div class="task-name" data-t="exercise">
+Машқи саҳарӣ
+</div>
+
+<div class="task-desc" data-t="exerciseDesc">
+5 дақиқа
+</div>
+
+</div>
+
+<div class="check" onclick="completeTask(this)"></div>
+
+</div>
+
+
+<div class="task">
+
+<div class="task-time">08:00</div>
+
+<div class="task-icon">📚</div>
+
+<div class="task-info">
+
+<div class="task-name" data-t="study">
+Дарс хондан
+</div>
+
+<div class="task-desc" data-t="studyDesc">
+60 дақиқа
+</div>
+
+</div>
+
+<div class="check" onclick="completeTask(this)"></div>
+
+</div>
+
+
+<div class="task">
+
+<div class="task-time">20:00</div>
+
+<div class="task-icon">📖</div>
+
+<div class="task-info">
+
+<div class="task-name" data-t="book">
+Китоб хондан
+</div>
+
+<div class="task-desc" data-t="bookDesc">
+30 дақиқа
+</div>
+
+</div>
+
+<div class="check" onclick="completeTask(this)"></div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="glass">
+
+<h2 data-t="progressTitle">
+⭐ Пешрафт
+</h2>
+
+<div class="card-subtitle" data-t="todayResult">
+Натиҷаи имрӯз
+</div>
+
+
+<div class="stat">
+
+<div>⭐ XP</div>
+
+<div class="stat-number" id="xp">
+0
+</div>
+
+<div class="stat-text" data-t="todayXP">
+Нуқтаҳои имрӯз
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div>☑️</div>
+
+<div class="stat-number" id="taskCount">
+0
+</div>
+
+<div class="stat-text" data-t="doneTasks">
+Вазифаи иҷро шуда
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div>🔥</div>
+
+<div class="stat-number">1</div>
+
+<div class="stat-text" data-t="streak">
+Рӯз пай дар пай
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SPORT -->
+
+<section id="sport" class="page">
+
+<div class="hero">
+
+<div>
+
+<h1 data-t="sportTitle">
+🏋️ Варзиш
+</h1>
+
+<p data-t="sportSub">
+Машқро интихоб кун. Ҳар машқ 5 дақиқа аст.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="sport-grid">
+
+
+<div class="sport-card">
+
+<div class="sport-icon">💪</div>
+
+<h2 data-t="arms">
+Дасту китф
+</h2>
+
+<p data-t="armsDesc">
+Машқи сабук барои дасту китф.
+</p>
+
+<button
+class="start-btn"
+onclick="startWorkout('Дасту китф')">
+
+▶ <span data-t="start">
+Оғоз — 5 дақиқа
+</span>
+
+</button>
+
+</div>
+
+
+<div class="sport-card">
+
+<div class="sport-icon">🦵</div>
+
+<h2 data-t="legs">
+Пойҳо
+</h2>
+
+<p data-t="legsDesc">
+Машқи сабук барои пойҳо.
+</p>
+
+<button
+class="start-btn"
+onclick="startWorkout('Пойҳо')">
+
+▶ <span data-t="start">
+Оғоз — 5 дақиқа
+</span>
+
+</button>
+
+</div>
+
+
+<div class="sport-card">
+
+<div class="sport-icon">❤️</div>
+
+<h2 data-t="cardio">
+Кардио
+</h2>
+
+<p data-t="cardioDesc">
+Ҳаракати сабук барои бадан.
+</p>
+
+<button
+class="start-btn"
+onclick="startWorkout('Кардио')">
+
+▶ <span data-t="start">
+Оғоз — 5 дақиқа
+</span>
+
+</button>
+
+</div>
+
+
+<div class="sport-card">
+
+<div class="sport-icon">🧘</div>
+
+<h2 data-t="stretch">
+Растяжка
+</h2>
+
+<p data-t="stretchDesc">
+Машқҳои сабук барои ҳаракат.
+</p>
+
+<button
+class="start-btn"
+onclick="startWorkout('Растяжка')">
+
+▶ <span data-t="start">
+Оғоз — 5 дақиқа
+</span>
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section id="results" class="page">
+
+<div class="hero">
+
+<div>
+
+<h1 data-t="resultsTitle">
+📊 Натиҷаҳои ҳафта
+</h1>
+
+<p data-t="resultsSub">
+Натиҷаи корҳои ҳар рӯз.
+</p>
+
+</div>
+
+</div>
+
+<div class="glass">
+
+<div
+class="week-results"
+id="weekResults">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+<div class="profile-container">
+
+<div class="profile-head">
+
+<h1 data-t="profileTitle">
+👤 Профили ман
+</h1>
+
+<button
+class="close-btn"
+onclick="closeProfile()">
+✕
+</button>
+
+</div>
+
+
+<div class="glass">
+
+<div class="avatar">
+M
+</div>
+
+<h2 class="profile-title">
+MY DAY
+</h2>
+
+<div
+class="profile-sub"
+data-t="profileSub">
+Натиҷаи ҳафтаи ман
+</div>
+
+
+<div class="profile-stats">
+
+<div class="profile-stat">
+
+<b id="profileXP">0</b>
+
+<span>XP</span>
+
+</div>
+
+
+<div class="profile-stat">
+
+<b id="profileTasks">0</b>
+
+<span data-t="tasks">Вазифаҳо</span>
+
+</div>
+
+
+<div class="profile-stat">
+
+<b id="profileWorkouts">0</b>
+
+<span data-t="workouts">Машқҳо</span>
+
+</div>
+
+</div>
+
+
+<div class="profile-week">
+
+<h2 data-t="weekTitle">
+📅 Ҳафтаи ман
+</h2>
+
+<div
+class="week-results"
+id="profileWeek">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- TIMER -->
+
+<div
+class="timer-overlay"
+id="timerOverlay">
+
+<div class="timer-box">
+
+<div style="font-size:50px;">
+🏋️
+</div>
+
+<h2 id="timerTitle">
+Машқ оғоз шуд
+</h2>
+
+<p
+id="timerExercise"
+style="color:#858ea4;margin-top:6px;">
+</p>
+
+<div
+class="timer-number"
+id="timerNumber">
+05:00
+</div>
+
+<div class="timer-actions">
+
+<button
+class="pause-btn"
+id="pauseButton"
+onclick="pauseTimer()">
+⏸ Таваққуф
+</button>
+
+<button
+class="close-timer"
+onclick="closeTimer()">
+✕ Бастан
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   LANGUAGE
+========================= */
+
+let language = "tg";
+
+const translations = {
+
+tg:{
+
+home:"Рӯзи ман",
+sport:"Варзиш",
+results:"Натиҷаҳо",
+
+hello:"Салом 👋",
+welcome:"Рӯзи худро бо нақшаи хуб оғоз кун.",
+
+alarmTitle:"🔔 Будильники ман",
+alarmText:"Вақтро интихоб кун, то ҳангоми расидани вақт огоҳӣ гирӣ.",
+alarmOff:"Фаъол кардан",
+alarmOn:"Будильник фаъол",
+
+tasksTitle:"📋 Вазифаҳои имрӯз",
+tasksSub:"Корҳои худро иҷро кун",
+
+progress:"Пешрафт",
+
+wake:"Хестан",
+wakeDesc:"Рӯзро барвақт оғоз кун",
+
+wash:"Дандон шустан",
+washDesc:"Омодагӣ ба рӯз",
+
+exercise:"Машқи саҳарӣ",
+exerciseDesc:"5 дақиқа",
+
+study:"Дарс хондан",
+studyDesc:"60 дақиқа",
+
+book:"Китоб хондан",
+bookDesc:"30 дақиқа",
+
+progressTitle:"⭐ Пешрафт",
+todayResult:"Натиҷаи имрӯз",
+todayXP:"Нуқтаҳои имрӯз",
+doneTasks:"Вазифаи иҷро шуда",
+streak:"Рӯз пай дар пай",
+
+sportTitle:"🏋️ Варзиш",
+sportSub:"Машқро интихоб кун. Ҳар машқ 5 дақиқа аст.",
+
+arms:"Дасту китф",
+armsDesc:"Машқи сабук барои дасту китф.",
+
+legs:"Пойҳо",
+legsDesc:"Машқи сабук барои пойҳо.",
+
+cardio:"Кардио",
+cardioDesc:"Ҳаракати сабук барои бадан.",
+
+stretch:"Растяжка",
+stretchDesc:"Машқҳои сабук барои ҳаракат.",
+
+start:"Оғоз — 5 дақиқа",
+
+resultsTitle:"📊 Натиҷаҳои ҳафта",
+resultsSub:"Натиҷаи корҳои ҳар рӯз.",
+
+profileTitle:"👤 Профили ман",
+profileSub:"Натиҷаи ҳафтаи ман",
+
+tasks:"Вазифаҳо",
+workouts:"Машқҳо",
+weekTitle:"📅 Ҳафтаи ман"
+
+},
+
+ru:{
+
+home:"Мой день",
+sport:"Спорт",
+results:"Результаты",
+
+hello:"Привет 👋",
+welcome:"Начни свой день с хорошего плана.",
+
+alarmTitle:"🔔 Мой будильник",
+alarmText:"Выбери время для будильника.",
+alarmOff:"Включить",
+alarmOn:"Будильник включён",
+
+tasksTitle:"📋 Задачи на сегодня",
+tasksSub:"Выполняй свои задачи",
+
+progress:"Прогресс",
+
+wake:"Встать",
+wakeDesc:"Начни день рано",
+
+wash:"Почистить зубы",
+washDesc:"Подготовка к дню",
+
+exercise:"Утренняя тренировка",
+exerciseDesc:"5 минут",
+
+study:"Учёба",
+studyDesc:"60 минут",
+
+book:"Читать книгу",
+bookDesc:"30 минут",
+
+progressTitle:"⭐ Прогресс",
+todayResult:"Результат сегодня",
+todayXP:"Очки сегодня",
+doneTasks:"Выполнено задач",
+streak:"Дней подряд",
+
+sportTitle:"🏋️ Спорт",
+sportSub:"Выбери упражнение. Каждое длится 5 минут.",
+
+arms:"Руки и плечи",
+armsDesc:"Лёгкая тренировка для рук и плеч.",
+
+legs:"Ноги",
+legsDesc:"Лёгкая тренировка для ног.",
+
+cardio:"Кардио",
+cardioDesc:"Лёгкая активность для тела.",
+
+stretch:"Растяжка",
+stretchDesc:"Лёгкие упражнения на движение.",
+
+start:"Старт — 5 минут",
+
+resultsTitle:"📊 Результаты недели",
+resultsSub:"Результаты каждого дня.",
+
+profileTitle:"👤 Мой профиль",
+profileSub:"Мой результат за неделю",
+
+tasks:"Задачи",
+workouts:"Тренировки",
+weekTitle:"📅 Моя неделя"
+
+},
+
+en:{
+
+home:"My Day",
+sport:"Sport",
+results:"Results",
+
+hello:"Hello 👋",
+welcome:"Start your day with a good plan.",
+
+alarmTitle:"🔔 My Alarm",
+alarmText:"Choose a time for your alarm.",
+alarmOff:"Turn on",
+alarmOn:"Alarm ON",
+
+tasksTitle:"📋 Today's Tasks",
+tasksSub:"Complete your tasks",
+
+progress:"Progress",
+
+wake:"Wake up",
+wakeDesc:"Start your day early",
+
+wash:"Brush teeth",
+washDesc:"Get ready for the day",
+
+exercise:"Morning workout",
+exerciseDesc:"5 minutes",
+
+study:"Study",
+studyDesc:"60 minutes",
+
+book:"Read a book",
+bookDesc:"30 minutes",
+
+progressTitle:"⭐ Progress",
+todayResult:"Today's result",
+todayXP:"Today's points",
+doneTasks:"Completed tasks",
+streak:"Days in a row",
+
+sportTitle:"🏋️ Sport",
+sportSub:"Choose an exercise. Each workout is 5 minutes.",
+
+arms:"Arms & shoulders",
+armsDesc:"Light workout for arms and shoulders.",
+
+legs:"Legs",
+legsDesc:"Light workout for legs.",
+
+cardio:"Cardio",
+cardioDesc:"Light activity for the body.",
+
+stretch:"Stretching",
+stretchDesc:"Light movement exercises.",
+
+start:"Start — 5 minutes",
+
+resultsTitle:"📊 Weekly Results",
+resultsSub:"Your results for each day.",
+
+profileTitle:"👤 My Profile",
+profileSub:"My weekly result",
+
+tasks:"Tasks",
+workouts:"Workouts",
+weekTitle:"📅 My Week"
+
+}
+
+};
+
+
+function changeLanguage(){
+
+    if(language==="tg"){
+        language="ru";
+    }
+    else if(language==="ru"){
+        language="en";
+    }
+    else{
+        language="tg";
+    }
+
+    document.getElementById("languageButton").textContent =
+        language==="tg" ? "🌐 TG" :
+        language==="ru" ? "🌐 RU" :
+        "🌐 EN";
+
+    applyLanguage();
+
+}
+
+
+function applyLanguage(){
+
+    document
+    .querySelectorAll("[data-t]")
+    .forEach(function(element){
+
+        const key=element.getAttribute("data-t");
+
+        if(translations[language][key]){
+            element.textContent=translations[language][key];
+        }
+
+    });
+
+    renderResults();
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+function showPage(page,button){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(function(p){
+        p.classList.remove("active");
+    });
+
+    document
+    .getElementById(page)
+    .classList.add("active");
+
+    document
+    .querySelectorAll("nav button")
+    .forEach(function(b){
+        b.classList.remove("active");
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    if(page==="results"){
+        renderResults();
+    }
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function openProfile(){
+
+    showPage("profile");
+
+    updateProfile();
+
+    renderProfileWeek();
+
+}
+
+
+function closeProfile(){
+
+    showPage("home");
+
+}
+
+
+/* =========================
+   CLOCK
+========================= */
+
+function updateClock(){
+
+    const now=new Date();
+
+    document.getElementById("clock").textContent =
+        new Intl.DateTimeFormat(
+            "en-GB",
+            {
+                timeZone:"Asia/Dushanbe",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+                hour12:false
+            }
+        ).format(now);
+
+    document.getElementById("date").textContent =
+        new Intl.DateTimeFormat(
+            language==="tg" ? "tg-TJ" :
+            language==="ru" ? "ru-RU" :
+            "en-US",
+            {
+                timeZone:"Asia/Dushanbe",
+                weekday:"long",
+                day:"numeric",
+                month:"long"
+            }
+        ).format(now);
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light");
+
+    document.getElementById("themeButton").textContent =
+        document.body.classList.contains("light")
+        ? "☀️"
+        : "🌙";
+
+}
+
+
+/* =========================
+   TASKS
+========================= */
+
+let completed=0;
+
+const totalTasks=5;
+
+function completeTask(check){
+
+    if(check.classList.contains("done")){
+        check.classList.remove("done");
+        completed--;
+    }
+    else{
+        check.classList.add("done");
+        completed++;
+    }
+
+    updateProgress();
+    updateProfile();
+    renderResults();
+    renderProfileWeek();
+
+}
+
+
+function updateProgress(){
+
+    const percent=
+        Math.round(completed/totalTasks*100);
+
+    document.getElementById("progressPercent")
+        .textContent=percent+"%";
+
+    document.getElementById("progressBar")
+        .style.width=percent+"%";
+
+    document.getElementById("xp")
+        .textContent=completed*10;
+
+    document.getElementById("taskCount")
+        .textContent=completed;
+
+}
+
+
+/* =========================
+   ALARM
+========================= */
+
+let alarmActive=false;
+
+function toggleAlarm(){
+
+    const input=document.getElementById("alarmTime");
+
+    if(!input.value){
+
+        alert(
+            language==="tg"
+            ? "Аввал вақти будильникро интихоб кун."
+            : language==="ru"
+            ? "Сначала выбери время будильника."
+            : "First choose an alarm time."
+        );
+
+        return;
+    }
+
+    alarmActive=!alarmActive;
+
+    const button=document.getElementById("alarmButton");
+
+    if(alarmActive){
+
+        button.classList.add("on");
+
+        button.innerHTML=
+            "🔔 <span data-t='alarmOn'>"+
+            translations[language].alarmOn+
+            "</span>";
+
+        playBeep();
+
+    }
+    else{
+
+        button.classList.remove("on");
+
+        button.innerHTML=
+            "🔕 <span data-t='alarmOff'>"+
+            translations[language].alarmOff+
+            "</span>";
+
+    }
+
+}
+
+
+function checkAlarm(){
+
+    if(!alarmActive){
+        return;
+    }
+
+    const input=document.getElementById("alarmTime");
+
+    if(!input.value){
+        return;
+    }
+
+    const now=new Date();
+
+    const current=
+        String(now.getHours()).padStart(2,"0")
+        +":"+
+        String(now.getMinutes()).padStart(2,"0");
+
+    if(current===input.value){
+
+        alarmActive=false;
+
+        document.getElementById("alarmButton")
+            .classList.remove("on");
+
+        alert(
+            language==="tg"
+            ? "🔔 Вақти будильник расид!"
+            : language==="ru"
+            ? "🔔 Время будильника!"
+            : "🔔 Alarm time!"
+        );
+
+        playBeep();
+
+    }
+
+}
+
+setInterval(checkAlarm,1000);
+
+
+/* =========================
+   SOUND
+========================= */
+
+function playBeep(){
+
+    try{
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+        const audio =
+            new AudioContext();
+
+        const oscillator =
+            audio.createOscillator();
+
+        const gain =
+            audio.createGain();
+
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
+
+        oscillator.frequency.value=800;
+
+        gain.gain.value=.2;
+
+        oscillator.start();
+
+        oscillator.stop(
+            audio.currentTime+.5
+        );
+
+    }catch(e){
+
+        console.log("Sound unavailable");
+
+    }
+
+}
+
+
+/* =========================
+   SPORT TIMER — 5 MINUTES
+========================= */
+
+let timer=null;
+
+let seconds=300;
+
+let running=false;
+
+let workoutCount=0;
+
+
+function startWorkout(name){
+
+    seconds=300;
+
+    running=true;
+
+    document.getElementById("timerExercise")
+        .textContent=name;
+
+    document.getElementById("timerOverlay")
+        .style.display="flex";
+
+    updateTimer();
+
+    clearInterval(timer);
+
+    timer=setInterval(function(){
+
+        if(!running){
+            return;
+        }
+
+        seconds--;
+
+        updateTimer();
+
+        if(seconds<=0){
+
+            clearInterval(timer);
+
+            running=false;
+
+            workoutCount++;
+
+            updateProfile();
+
+            playBeep();
+
+            alert(
+                language==="tg"
+                ? "🎉 5 дақиқаи машқ тамом шуд!"
+                : language==="ru"
+                ? "🎉 5 минут тренировки закончились!"
+                : "🎉 Your 5-minute workout is finished!"
+            );
+
+        }
+
+    },1000);
+
+}
+
+
+function updateTimer(){
+
+    const minutes=Math.floor(seconds/60);
+
+    const secs=seconds%60;
+
+    document.getElementById("timerNumber")
+        .textContent=
+        String(minutes).padStart(2,"0")
+        +":"+
+        String(secs).padStart(2,"0");
+
+}
+
+
+function pauseTimer(){
+
+    running=!running;
+
+    document.getElementById("pauseButton")
+        .textContent=
+        running
+        ? "⏸ Таваққуф"
+        : "▶ Давом додан";
+
+}
+
+
+function closeTimer(){
+
+    clearInterval(timer);
+
+    running=false;
+
+    document.getElementById("timerOverlay")
+        .style.display="none";
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function updateProfile(){
+
+    document.getElementById("profileXP")
+        .textContent=completed*10;
+
+    document.getElementById("profileTasks")
+        .textContent=completed;
+
+    document.getElementById("profileWorkouts")
+        .textContent=workoutCount;
+
+}
+
+
+/* =========================
+   WEEK RESULTS
+========================= */
+
+const weekNames={
+    tg:[
+        "Душанбе",
+        "Сешанбе",
+        "Чоршанбе",
+        "Панҷшанбе",
+        "Ҷумъа",
+        "Шанбе",
+        "Якшанбе"
+    ],
+    ru:[
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота",
+        "Воскресенье"
+    ],
+    en:[
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ]
+};
+
+
+/*
+   Барои намуна:
+   рӯзи чоршанбе натиҷаи имрӯз аст.
+*/
+
+function getDayResult(index){
+
+    if(index===2){
+
+        return completed;
+
+    }
+
+    return 0;
+
+}
+
+
+function renderResults(){
+
+    const containers=[
+        document.getElementById("weekResults"),
+        document.getElementById("profileWeek")
+    ];
+
+    containers.forEach(function(container){
+
+        if(!container){
+            return;
+        }
+
+        container.innerHTML="";
+
+        for(let i=0;i<7;i++){
+
+            const tasks=getDayResult(i);
+
+            const good=tasks>=3;
+
+            const card=document.createElement("div");
+
+            card.className=
+                "result-card "+
+                (good ? "good" : "bad");
+
+            const status=
+                good
+                ? (
+                    language==="tg" ? "Хуб" :
+                    language==="ru" ? "Хорошо" :
+                    "Good"
+                )
+                : (
+                    language==="tg" ? "Бад" :
+                    language==="ru" ? "Плохо" :
+                    "Bad"
+                );
+
+            const icon=good ? "😊" : "😕";
+
+            card.innerHTML=`
+
+                <div class="result-icon">
+                    ${icon}
+                </div>
+
+                <div class="result-day">
+                    ${weekNames[language][i]}
+                </div>
+
+                <div class="result-status">
+                    ${status}
+                </div>
+
+                <div class="result-number">
+                    ${tasks}/5
+                </div>
+
+            `;
+
+            container.appendChild(card);
+
+        }
+
+    });
+
+}
+
+
+function renderProfileWeek(){
+    renderResults();
+}
+
+
+/* =========================
+   DAYS BUTTONS
+========================= */
+
+document
+.querySelectorAll(".day")
+.forEach(function(day){
+
+    day.addEventListener("click",function(){
+
+        document
+        .querySelectorAll(".day")
+        .forEach(function(d){
+            d.classList.remove("active");
+        });
+
+        day.classList.add("active");
+
+    });
+
+});
+
+
+/* START */
+
+updateProgress();
+
+updateProfile();
+
+renderResults();
+
+</script>
+
+</body>
+</html>
